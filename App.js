@@ -5,7 +5,6 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import LandingPage from './screens/LandingPageScreen';
 import Timer from './screens/TimerScreen';
 import List from './screens/ListScreen';
-import User from './screens/UserScreen';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
@@ -21,7 +20,6 @@ function HomePage()
      <Tab.Screen name='Timer' options={{tabBarIcon:({color})=><MaterialCommunityIcons name="timer" size={30} color={color} />}} component={Timer}></Tab.Screen>
      <Tab.Screen name='List' options={{tabBarIcon:({color})=><FontAwesome name="th-list" size={30} color={color} />}} component={List}></Tab.Screen>
      <Tab.Screen name='Stats'options={{tabBarIcon:({color})=><AntDesign name="piechart" size={30} color={color} />}} component={StatsScreen}></Tab.Screen>
-     <Tab.Screen name='User'options={{tabBarIcon:({size,color})=><FontAwesome name="user" size={30} color={color} />}} component={User}></Tab.Screen>
   </Tab.Navigator>
 }
 

@@ -1,9 +1,9 @@
 import { View, Text,Pressable,StyleSheet} from 'react-native'
 import React from 'react'
 
-export default function Button({children,onPress}) {
+export default function Button({children,onPress,style}) {
   return (
-    <View style={styles.container}>
+    <View style={[styles.container,style]}>
         <Pressable android_ripple={{color:'#210644'}} onPress={onPress} style={({pressed})=>[pressed&&styles.pressed]}>
             <Text style={styles.text}>{children}</Text>
         </Pressable>
@@ -14,15 +14,14 @@ export default function Button({children,onPress}) {
 const styles=StyleSheet.create({
     container:{
         borderRadius:10,
+        overflow:'hidden',
+        width:'100%',
         backgroundColor:'#00ADF8',
-    },
-    pressed:{
-        // opacity:0.5
     },
     text:{
         color:'white',
-        fontSize:24,
+        fontSize:20,
         textAlign:'center',
-        padding:8
+        padding:10
     }
 })

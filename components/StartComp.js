@@ -3,6 +3,7 @@ import React from 'react'
 import Button from '../utils/Button'
 import { Color } from '../constants/Colors'
 import { useNavigation } from '@react-navigation/native'
+import { AntDesign } from '@expo/vector-icons';
 
 export default function StartComp() {
 
@@ -24,7 +25,7 @@ export default function StartComp() {
         <View style={styles.imgContainer}>
       <Image style={styles.img} source={require('../assets/work1.gif')}/>
         </View>
-        <Button onPress={switchScreen}>Continue</Button>
+        <Button onPress={switchScreen}>Continue <AntDesign name="arrowright" size={24} color="white" /></Button>
     </View>
   )
 }
@@ -46,7 +47,7 @@ const styles=StyleSheet.create({
         justifyContent:'center'
     },
     img:{
-      height:400,
+      height:350,
       width:'90%'
     },
     text:{

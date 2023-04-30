@@ -9,17 +9,32 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
 import StatsScreen from './screens/StatsScreen';
+import { Color } from './constants/Colors';
+import { StyleSheet } from 'react-native';
+import AddTask from './screens/AddTask';
+import { View,Text} from 'react-native';
 
 const Stack=createNativeStackNavigator();
 const Tab=createBottomTabNavigator();
 
 
+function ListAdd()
+{
+  return (
+    <Stack.Navigator screenOptions={{headerShown:false}}>
+      <Stack.Screen name='List' component={List}></Stack.Screen>
+      <Stack.Screen name='addTask' component={AddTask} ></Stack.Screen>
+    </Stack.Navigator>
+  )
+}
+
+
 function HomePage()
 {
-  return <Tab.Navigator screenOptions={{headerShown:false,tabBarShowLabel:false,tabBarStyle:{height:80},tabBarActiveTintColor:'#6E7DFF'}}>
-     <Tab.Screen name='Timer' options={{tabBarIcon:({color})=><MaterialCommunityIcons name="timer" size={30} color={color} />}} component={Timer}></Tab.Screen>
-     <Tab.Screen name='List' options={{tabBarIcon:({color})=><FontAwesome name="th-list" size={30} color={color} />}} component={List}></Tab.Screen>
-     <Tab.Screen name='Stats'options={{tabBarIcon:({color})=><AntDesign name="piechart" size={30} color={color} />}} component={StatsScreen}></Tab.Screen>
+  return <Tab.Navigator  screenOptions={{tabBarItemStyle:{backgroundColor:Color.primary600},headerShown:false,tabBarShowLabel:false,tabBarActiveTintColor:'#6E7DFF'}}>
+     <Tab.Screen name='ListAdd' options={{tabBarStyle:{borderTopWidth:0,height:80},tabBarIcon:({color})=><FontAwesome name="th-list" size={30} color={color} />}} component={ListAdd}></Tab.Screen>
+     <Tab.Screen name='Timer' options={{tabBarStyle:{borderTopWidth:0,height:80},tabBarIcon:({color})=><MaterialCommunityIcons name="timer" size={30} color={color} />}} component={Timer}></Tab.Screen>
+     <Tab.Screen name='Stats'options={{tabBarStyle:{borderTopWidth:0,height:80},tabBarIcon:({color})=><AntDesign name="piechart" size={30} color={color} />}} component={StatsScreen}></Tab.Screen>
   </Tab.Navigator>
 }
 
@@ -42,3 +57,8 @@ export default function App() {
   );
 }
 
+const styles=StyleSheet.create({
+  container:{
+    borderTopWidth:0,
+  }
+})

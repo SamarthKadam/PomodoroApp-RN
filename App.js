@@ -12,18 +12,18 @@ import StatsScreen from './screens/StatsScreen';
 import { Color } from './constants/Colors';
 import { StyleSheet } from 'react-native';
 import AddTask from './screens/AddTask';
-import { View,Text} from 'react-native';
 
 const Stack=createNativeStackNavigator();
 const Tab=createBottomTabNavigator();
 
 
-function ListAdd()
+
+function ListAdd({navigation})
 {
   return (
-    <Stack.Navigator screenOptions={{headerShown:false}}>
-      <Stack.Screen name='List' component={List}></Stack.Screen>
-      <Stack.Screen name='addTask' component={AddTask} ></Stack.Screen>
+    <Stack.Navigator>
+      <Stack.Screen options={{headerShown:false}}  name='List' component={List}></Stack.Screen>
+      <Stack.Screen options={{}}  name='addTask' component={AddTask} ></Stack.Screen>
     </Stack.Navigator>
   )
 }
@@ -40,6 +40,8 @@ function HomePage()
 
 
 export default function App() {
+
+
   return (
     <>
     <StatusBar style="light"></StatusBar>
@@ -56,9 +58,3 @@ export default function App() {
        </>
   );
 }
-
-const styles=StyleSheet.create({
-  container:{
-    borderTopWidth:0,
-  }
-})

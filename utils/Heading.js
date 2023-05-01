@@ -14,7 +14,7 @@ const styles=StyleSheet.create({
     text:{
         fontSize:18,
         marginTop:14,
-        fontWeight:'600',
+        fontWeight:'700',
         color:'white'
     }
 })

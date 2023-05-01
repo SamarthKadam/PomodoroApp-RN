@@ -16,13 +16,14 @@ export default function EmptyTask() {
 const styles=StyleSheet.create({
     container:{
         width:'100%',
-        marginTop:30,
+        marginTop:60,
         flexDirection:'row',
-        justifyContent:'center'
+        alignItems:'center',
+        justifyContent:'center',
     },
     image:{
-        height:200,
-        width:200
+        height:250,
+        width:250
     },
     boldtext:{
         fontSize:22,

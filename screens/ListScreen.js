@@ -1,5 +1,5 @@
 import { View, Text,StyleSheet,FlatList} from 'react-native'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Color } from '../constants/Colors'
 import Greet from '../utils/Greet'
 import Heading from '../utils/Heading'
@@ -7,43 +7,29 @@ import TaskList from '../components/TaskList'
 import Button from '../utils/Button'
 import EmptyTask from '../components/EmptyTask'
 import { useNavigation } from '@react-navigation/native'
+import { fetchTasks } from '../store/database'
+import { useIsFocused } from '@react-navigation/native'
 
-let show=0;
 
 export default function List() {
 
+  const [tasks,setTasks]=useState([]);
+  const isFocused=useIsFocused()
   const navigation=useNavigation();
 
+  useEffect(()=>{
+    async function loadTasks()
+    {
+      const tasks=await fetchTasks()
+      setTasks(tasks);
+      console.log(tasks);
+    }
+    if(isFocused)
+    {
+      loadTasks();
+    }
 
-  const DUMMY_TODOS=[{
-    id:'1',
-    priority:'high',
-    title:'Mobile App Design',
-    time:'25min',
- },{
-    id:'2',
-    priority:'medium',
-    title:'Desktop Build',
-    time:'25min',
- },
- {
-    id:'3',
-    priority:'low',
-    title:'Study Languages',
-    time:'25min',
- },
- {
-  id:'4',
-  priority:'low',
-  title:'Study Languages',
-  time:'25min',
-},
-{
-  id:'5',
-  priority:'low',
-  title:'Study Languages',
-  time:'25min',
-}]
+  },[isFocused])
 
  function renderTasks(itemData)
  {
@@ -54,6 +40,8 @@ export default function List() {
     title:item.title,
     priority:item.priority,
     time:item.time,
+    interval:item.interval
+
   }
 
   return <TaskList {...taskprop}></TaskList>
@@ -73,16 +61,16 @@ export default function List() {
     <View style={styles.screen}>
       <Greet>Today</Greet>
       <Heading>All Tasks</Heading>
-     {show?<View>
+     {tasks.length>0?<View>
       <View style={styles.tasklistContainer}>
-        <FlatList data={DUMMY_TODOS} keyExtractor={(item)=>item.id}  renderItem={renderTasks}></FlatList>
+        <FlatList data={tasks} keyExtractor={(item)=>item.id}  renderItem={renderTasks}></FlatList>
       </View>
       <Heading style={styles.padbot}>Completed</Heading>
       <View style={styles.completedList}>
       </View>
       </View>
       :null}
-      {!show?<EmptyTask></EmptyTask>:null}
+      {tasks.length===0?<EmptyTask></EmptyTask>:null}
       <Button onPress={addTaskHandler} style={styles.styleButton}>+ Add new task</Button>
     </View>
   )
@@ -111,6 +99,7 @@ const styles=StyleSheet.create({
     marginTop:12,
     position:'absolute',
     top:'95%',
-    alignSelf:'center'
+    alignSelf:'center',
+    backgroundColor:'#00ADF8',
   }
 })

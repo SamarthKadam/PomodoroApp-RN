@@ -9,11 +9,11 @@ export default function TaskList({id,title,time,priority,interval}) {
 
     let color;
 
-    if(priority==='low')
+    if(priority===2)
     {
         color=Color.green
     }
-    else if(priority==='medium')
+    else if(priority===1)
     {
         color=Color.yellow
     }
@@ -31,7 +31,7 @@ export default function TaskList({id,title,time,priority,interval}) {
             <Text style={[styles.smColor]}>{time} Minutes</Text>
         </View>
         <View style={styles.timercontainer}>
-            <Text style={styles.textColor}>1/4</Text>
+            <Text style={styles.textColor}>1/{interval}</Text>
             <Text style={[styles.smColor]}>25 min</Text>
         </View>
         <View>

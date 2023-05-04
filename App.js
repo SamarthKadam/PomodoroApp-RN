@@ -10,8 +10,13 @@ import { FontAwesome } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
 import StatsScreen from './screens/StatsScreen';
 import { Color } from './constants/Colors';
-import { StyleSheet } from 'react-native';
 import AddTask from './screens/AddTask';
+import { useEffect } from 'react';
+import * as SplashScreen from 'expo-splash-screen'
+import { useState } from 'react';
+import { init } from './store/database';
+
+SplashScreen.preventAutoHideAsync();
 
 const Stack=createNativeStackNavigator();
 const Tab=createBottomTabNavigator();
@@ -40,6 +45,29 @@ function HomePage()
 
 
 export default function App() {
+
+
+  const[dbInitialized,setDbInitialized]=useState(false);
+
+  useEffect(()=>{
+    init().then(()=>{
+      setDbInitialized(true)
+    }).catch((err)=>{
+      console.log(err);
+    })
+  },[])
+
+
+  if(dbInitialized)
+  {
+
+   async function hideScreen()
+    {
+      await SplashScreen.hideAsync();
+    }
+
+    hideScreen();
+  }
 
 
   return (

@@ -8,8 +8,9 @@ import { useState } from 'react'
 import { useLayoutEffect } from 'react'
 import IconButton from '../utils/IconButton'
 import { useNavigation } from '@react-navigation/native'
+import { Alert } from 'react-native'
 
-export default function FormInput() {
+export default function FormInput({onaddTask}) {
 
   const navigation=useNavigation();
 
@@ -24,11 +25,19 @@ export default function FormInput() {
 
   function EvaluateData()
   {
-    console.log(taskName);
-    console.log(activePriority)
-    console.log(times);
-    console.log(breaktime);
 
+    if(!taskName || Number.isInteger(taskName))
+    {
+      Alert.alert('Invalid Details','Please check your inputs')
+      return;
+    }
+    if(activePriority==-1 || !times||!breaktime)
+    {
+      Alert.alert('Invalid Details','Please check your inputs')
+      return 
+    }
+
+    onaddTask({title:taskName,interval:times,time:0,compltdinterval:0,completed:false,priority:activePriority})
     setBreakTime('');
     setTimes('');
     setTaskName('');

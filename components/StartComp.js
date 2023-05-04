@@ -25,7 +25,7 @@ export default function StartComp() {
         <View style={styles.imgContainer}>
       <Image style={styles.img} source={require('../assets/work1.gif')}/>
         </View>
-        <Button onPress={switchScreen}>Continue <AntDesign name="arrowright" size={24} color="white" /></Button>
+        <Button style={styles.bgColor} onPress={switchScreen}>Continue <AntDesign name="arrowright" size={24} color="white" /></Button>
     </View>
   )
 }
@@ -63,5 +63,8 @@ const styles=StyleSheet.create({
     text3:{
         color:'#67B7D1',
     },
+    bgColor:{
+      backgroundColor:'#00ADF8',
+    }
 
   })

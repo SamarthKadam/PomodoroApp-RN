@@ -16,7 +16,6 @@ const styles=StyleSheet.create({
         borderRadius:10,
         overflow:'hidden',
         width:'100%',
-        backgroundColor:'#00ADF8',
     },
     text:{
         color:'white',

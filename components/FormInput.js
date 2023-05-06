@@ -14,7 +14,6 @@ export default function FormInput({onaddTask}) {
 
   const navigation=useNavigation();
 
-
   const[activePriority,setActivePriority]=useState(-1);
   const[taskName,setTaskName]=useState();
   const[times,setTimes]=useState();
@@ -26,7 +25,7 @@ export default function FormInput({onaddTask}) {
   function EvaluateData()
   {
 
-    if(!taskName || Number.isInteger(taskName))
+    if(!taskName || !isNaN(taskName))
     {
       Alert.alert('Invalid Details','Please check your inputs')
       return;
@@ -179,3 +178,4 @@ const styles=StyleSheet.create({
       marginTop:8,
     }
 })
+

@@ -11,7 +11,6 @@ export default function AddTask() {
 
 async  function addTaskHandler(task)
   {
-    console.log(task);
     await insertTask(task);
     navigation.navigate('List');
   }

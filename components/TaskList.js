@@ -1,10 +1,10 @@
-import { View, Text,StyleSheet} from 'react-native'
+import { View, Text,StyleSheet,Pressable} from 'react-native'
 import React from 'react'
 import { Color } from '../constants/Colors'
 import { FontAwesome } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
 
-export default function TaskList({id,title,time,priority,interval}) {
+export default function TaskList({id,title,time,priority,interval,deleteTaskHandler}) {
 
 
     let color;
@@ -22,7 +22,7 @@ export default function TaskList({id,title,time,priority,interval}) {
     }
 
   return (
-      <View style={styles.container}>
+      <Pressable onLongPress={deleteTaskHandler.bind(this,id)} style={styles.container}>
         <View>
         <FontAwesome name="circle" size={24} color={color} />
         </View>
@@ -37,7 +37,7 @@ export default function TaskList({id,title,time,priority,interval}) {
         <View>
         <AntDesign name="playcircleo" size={24} color={Color.secondary800} />
         </View>
-      </View>
+      </Pressable>
   )
 }
 

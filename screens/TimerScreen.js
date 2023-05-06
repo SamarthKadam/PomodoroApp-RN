@@ -8,11 +8,11 @@ import Button from '../utils/Button'
 
 export default function Timer() {
 
-
+  // id,title,time,priority,interval,deleteTaskHandler}
 
   return (
     <View style={styles.screen}>
-      <TaskList id='22' title="Mobile Dev"></TaskList>
+      <TaskList id='22' title="Mobile Dev" time={4} priority={2} interval={5} deleteTaskHandler={()=>{}}></TaskList>
       <TimerComponent></TimerComponent>
       <View style={styles.buttonsContainer}>
         <View style={styles.buttonContainer1}><Button style={styles.btnBgColor}>Stop</Button></View>

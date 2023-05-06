@@ -1,4 +1,4 @@
-import { View, Text,StyleSheet,FlatList} from 'react-native'
+import { View, Text,StyleSheet,FlatList, Alert} from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { Color } from '../constants/Colors'
 import Greet from '../utils/Greet'
@@ -9,6 +9,7 @@ import EmptyTask from '../components/EmptyTask'
 import { useNavigation } from '@react-navigation/native'
 import { fetchTasks } from '../store/database'
 import { useIsFocused } from '@react-navigation/native'
+import { deleteTask } from '../store/database'
 
 
 export default function List() {
@@ -17,12 +18,42 @@ export default function List() {
   const isFocused=useIsFocused()
   const navigation=useNavigation();
 
+
+
+
+
+  function deleteTaskFunction(id)
+  {
+    setTasks((tasks)=>{
+
+      return tasks.filter((task)=>task.id!==id)
+    })
+    deleteTask(id);
+  }
+
+
+  function deleteTaskHandler(id)
+  {
+    Alert.alert('Delete','Are You Sure To Delete This Task',[
+      {
+        text:'Cancel',
+        onPress:()=>console.log("Cancel Pressed"),
+        style:'cancel'
+      },
+      {
+        text:'Okay',
+        onPress:()=>deleteTaskFunction(id),
+        style:'default'
+      }
+    ])
+  }
+
+
   useEffect(()=>{
     async function loadTasks()
     {
       const tasks=await fetchTasks()
       setTasks(tasks);
-      console.log(tasks);
     }
     if(isFocused)
     {
@@ -40,7 +71,8 @@ export default function List() {
     title:item.title,
     priority:item.priority,
     time:item.time,
-    interval:item.interval
+    interval:item.interval,
+    deleteTaskHandler:deleteTaskHandler
 
   }
 

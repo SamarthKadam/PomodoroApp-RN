@@ -83,3 +83,23 @@ export function fetchTasks()
 
     return promise;
 }
+
+export function deleteTask(id)
+{
+    const promise=new Promise((resolve,reject)=>{
+        database.transaction((tx)=>{
+            tx.executeSql(`DELETE FROM tasks where id=${id}`,
+            [],
+            (_,result)=>{
+                console.log(result.rows._array);
+                resolve();
+            },
+            (_,error)=>{
+                reject(error);
+            }
+            )
+        })
+    })
+
+    return promise;
+}

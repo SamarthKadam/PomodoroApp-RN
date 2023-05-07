@@ -8,7 +8,7 @@ export default function TimerComponent() {
   return (
     <View style={styles.timerContainer}>
     <CountdownCircleTimer
-    isPlaying={false}
+    isPlaying={true}
     duration={400}
     colors={[Color.secondary800]}
     colorsTime={[7]}

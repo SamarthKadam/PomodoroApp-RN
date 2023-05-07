@@ -48,6 +48,13 @@ export default function List() {
     ])
   }
 
+  function startTaskTimer(id)
+  {
+   const chosen=tasks.filter((task)=>task.id===id)
+   navigation.navigate('Timer',{chosen});
+  }
+ 
+
 
   useEffect(()=>{
     async function loadTasks()
@@ -72,7 +79,8 @@ export default function List() {
     priority:item.priority,
     time:item.time,
     interval:item.interval,
-    deleteTaskHandler:deleteTaskHandler
+    deleteTaskHandler:deleteTaskHandler,
+    startTaskTimer:startTaskTimer
 
   }
 
@@ -111,7 +119,7 @@ export default function List() {
 const styles=StyleSheet.create({
   screen:{
     flex:1,
-    paddingHorizontal:24,
+    paddingHorizontal:18,
     paddingTop:54,
     position:'relative',
     backgroundColor:Color.primary800,

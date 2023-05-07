@@ -4,7 +4,7 @@ import { Color } from '../constants/Colors'
 import { FontAwesome } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
 
-export default function TaskList({id,title,time,priority,interval,deleteTaskHandler}) {
+export default function TaskList({id,title,time,priority,interval,deleteTaskHandler,startTaskTimer }) {
 
 
     let color;
@@ -22,7 +22,7 @@ export default function TaskList({id,title,time,priority,interval,deleteTaskHand
     }
 
   return (
-      <Pressable onLongPress={deleteTaskHandler.bind(this,id)} style={styles.container}>
+      <Pressable onPress={startTaskTimer.bind(this,id)} onLongPress={deleteTaskHandler.bind(this,id)} style={styles.container}>
         <View>
         <FontAwesome name="circle" size={24} color={color} />
         </View>

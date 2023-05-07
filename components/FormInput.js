@@ -107,7 +107,7 @@ export default function FormInput({onaddTask}) {
 const styles=StyleSheet.create({
   container:{
     paddingTop:64,
-    paddingHorizontal:24,
+    paddingHorizontal:18,
     backgroundColor:Color.primary800,
     height:100,
     flexDirection:'row',
@@ -115,7 +115,7 @@ const styles=StyleSheet.create({
     width:'100%'
   },
     formContainer:{
-        paddingHorizontal:24
+        paddingHorizontal:18
     },
     Container:{
       backgroundColor:Color.primary600,

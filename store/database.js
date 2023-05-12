@@ -42,11 +42,9 @@ export function insertTask(task)
             tx.executeSql(`INSERT INTO tasks (title,interval,time,compltdinterval,completed,priority) VALUES (?,?,?,?,?,?)`,
             [task.title,task.interval,task.time,task.compltdinterval,task.completed,task.priority],
             (result)=>{
-                console.log(result);
                 resolve(result);
             },
             (_,error)=>{
-                console.log(error);
                 reject(error);
             });
         })
@@ -65,7 +63,6 @@ export function fetchTasks()
            tx.executeSql(`SELECT * FROM tasks`,
             [],
             (_,result)=>{
-                console.log(result.rows._array);
                 const tasks=[];
 
                 for(const item of result.rows._array)
@@ -91,7 +88,6 @@ export function deleteTask(id)
             tx.executeSql(`DELETE FROM tasks where id=${id}`,
             [],
             (_,result)=>{
-                console.log(result.rows._array);
                 resolve();
             },
             (_,error)=>{
@@ -102,4 +98,26 @@ export function deleteTask(id)
     })
 
     return promise;
+}
+
+export function updateTask(id,value)
+{
+
+    const promise=new Promise((resolve,reject)=>{
+        database.transaction((tx)=>{
+            tx.executeSql(`UPDATE tasks SET time =${value} WHERE id=${id}`,
+            [],
+            (_,result)=>{
+                console.log(result.rowsAffected);
+                resolve();
+            },
+            (_,error)=>{
+                reject(error);
+            }
+            )
+        })
+    })
+
+    return promise;
+
 }

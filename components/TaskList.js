@@ -28,7 +28,7 @@ export default function TaskList({id,title,time,priority,interval,deleteTaskHand
         </View>
         <View style={styles.titleContainer}>
             <Text style={[styles.textColor]}>{title}</Text>
-            <Text style={[styles.smColor]}>{time} Minutes</Text>
+            <Text style={[styles.smColor]}>{Math.floor(time/60)} Minutes</Text>
         </View>
         <View style={styles.timercontainer}>
             <Text style={styles.textColor}>1/{interval}</Text>

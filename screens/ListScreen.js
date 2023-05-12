@@ -22,13 +22,13 @@ export default function List() {
 
 
 
-  function deleteTaskFunction(id)
+  async function deleteTaskFunction(id)
   {
     setTasks((tasks)=>{
 
       return tasks.filter((task)=>task.id!==id)
     })
-    deleteTask(id);
+   await deleteTask(id);
   }
 
 

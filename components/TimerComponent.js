@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import Button from '../utils/Button'
 import { Color } from '../constants/Colors'
 import { CountdownCircleTimer } from 'react-native-countdown-circle-timer'
-import {useNavigation } from '@react-navigation/native'
+import {useIsFocused, useNavigation } from '@react-navigation/native'
 import { updateTask } from '../store/database'
 
 
@@ -11,14 +11,33 @@ export default function TimerComponent({data}) {
 
 
 
+ const isFocused=useIsFocused();
+
 
 
   let dispMinutes;
   let dispSeconds;
-  console.log(data);
 
   const navigation=useNavigation();
   const[isPlaying,setIsPlaying]=useState(false);
+
+  async function updateTaskTime()
+  {
+    const minutes=Math.floor(dispMinutes);
+    const seconds=Math.floor(dispSeconds);
+
+    const time=minutes*60+seconds;
+    await updateTask(data.id,time);
+  }
+
+  useEffect(()=>{
+    if(!isFocused)
+    {
+      setIsPlaying(false);
+      updateTaskTime()
+    }
+
+  },[isFocused])
 
 
 
@@ -27,15 +46,6 @@ export default function TimerComponent({data}) {
 
     setIsPlaying((data)=>!data);
 
-  }
-
- async function updateTaskTime()
-  {
-    const minutes=Math.floor(dispMinutes);
-    const seconds=Math.floor(dispSeconds);
-
-    const time=minutes*60+seconds;
-    await updateTask(data.id,time);
   }
 
   function exitTimer()

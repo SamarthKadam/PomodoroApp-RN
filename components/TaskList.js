@@ -4,7 +4,7 @@ import { Color } from '../constants/Colors'
 import { FontAwesome } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
 
-export default function TaskList({id,title,time,priority,interval,deleteTaskHandler,startTaskTimer }) {
+export default function TaskList({id,title,time,priority,interval,deleteTaskHandler,startTaskTimer,show}) {
 
 
     let color;
@@ -35,7 +35,7 @@ export default function TaskList({id,title,time,priority,interval,deleteTaskHand
             <Text style={[styles.smColor]}>25 min</Text>
         </View>
         <View>
-        <AntDesign name="playcircleo" size={24} color={Color.secondary800} />
+        {show && <AntDesign name="playcircleo" size={24} color={Color.secondary800} />}
         </View>
       </Pressable>
   )

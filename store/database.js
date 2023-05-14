@@ -103,12 +103,12 @@ export function deleteTask(id)
 export function updateTask(id,value)
 {
 
+
     const promise=new Promise((resolve,reject)=>{
         database.transaction((tx)=>{
             tx.executeSql(`UPDATE tasks SET time =${value} WHERE id=${id}`,
             [],
             (_,result)=>{
-                console.log(result.rowsAffected);
                 resolve();
             },
             (_,error)=>{
@@ -120,4 +120,41 @@ export function updateTask(id,value)
 
     return promise;
 
+}
+
+export function getCompleted()
+{
+    const promise=new Promise((resolve,reject)=>{
+        database.transaction((tx)=>{
+            tx.executeSql('SELECT COUNT(id) FROM tasks WHERE completed=0',
+            [],
+            (_,result)=>{
+                const data=(result.rows._array[0]["COUNT(id)"]);
+                resolve(data);
+            },
+            (_,error)=>{
+                reject(error);
+            })
+        })
+    })
+
+    return promise;
+}
+
+export function getTotal()
+{
+    const promise=new Promise((resolve,reject)=>{
+        database.transaction((tx)=>{
+            tx.executeSql('SELECT COUNT(ID) FROM tasks',
+            [],
+            (_,result)=>{
+                const data=(result.rows._array[0]["COUNT(ID)"]);
+                resolve(data);
+            },
+            (_,error)=>{
+                reject(error);
+            })
+        })
+    })
+    return promise;
 }

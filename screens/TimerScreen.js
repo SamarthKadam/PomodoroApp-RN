@@ -18,11 +18,9 @@ export default function Timer() {
  useEffect(()=>{
   if(isFocused)
   {
-    console.log("isfocued");
     setShowTimer(true);
   }
   else{
-    console.log("removed");
     setShowTimer(false);
   }
  },[isFocused])
@@ -30,7 +28,7 @@ export default function Timer() {
 
   return (
     <View style={styles.screen}>
-      <TaskList id={data.id} title={data.title} time={data.time} priority={data.priority} interval={data.interval} startTaskTimer={()=>{}} deleteTaskHandler={()=>{}}></TaskList>
+      <TaskList id={data.id} show={false} title={data.title} time={data.time} priority={data.priority} interval={data.interval} startTaskTimer={()=>{}} deleteTaskHandler={()=>{}}></TaskList>
      {showTimer&&<TimerComponent data={data}></TimerComponent>}
     </View>
   )

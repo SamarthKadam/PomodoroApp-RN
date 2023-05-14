@@ -14,6 +14,7 @@ import { deleteTask } from '../store/database'
 
 export default function List() {
 
+
   const [tasks,setTasks]=useState([]);
   const isFocused=useIsFocused()
   const navigation=useNavigation();
@@ -80,7 +81,8 @@ export default function List() {
     time:item.time,
     interval:item.interval,
     deleteTaskHandler:deleteTaskHandler,
-    startTaskTimer:startTaskTimer
+    startTaskTimer:startTaskTimer,
+    show:true
 
   }
 

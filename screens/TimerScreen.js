@@ -5,6 +5,7 @@ import TimerComponent from '../components/TimerComponent'
 import TaskList from '../components/TaskList'
 import Button from '../utils/Button'
 import { useIsFocused, useRoute } from '@react-navigation/native'
+import Popup from '../components/Popup'
 // import CircularProgress from 'react-native-circular-progress-indicator'
 
 export default function Timer() {
@@ -14,6 +15,11 @@ export default function Timer() {
   data=psdData[0];
  const isFocused=useIsFocused();
  const [showTimer,setShowTimer]=useState(false);
+ const[showPopUp,setShowPopUp]=useState(false);
+ const[popMsg,setPopMsg]=useState('');
+
+
+ console.log(showPopUp);
 
  useEffect(()=>{
   if(isFocused)
@@ -26,10 +32,19 @@ export default function Timer() {
  },[isFocused])
 
 
+
+ function showPop(val,interval)
+ {
+  console.log("who fucking executed");
+  setShowPopUp(val);
+  setPopMsg(interval);
+ }
+
   return (
     <View style={styles.screen}>
+      {showPopUp&&<Popup message={`Take a rest of ${popMsg} min then play the timer`}></Popup>}
       <TaskList id={data.id} show={false} title={data.title} time={data.time} priority={data.priority} interval={data.interval} startTaskTimer={()=>{}} deleteTaskHandler={()=>{}}></TaskList>
-     {showTimer&&<TimerComponent data={data}></TimerComponent>}
+     {showTimer&&<TimerComponent showPopUp={showPopUp} showPop={showPop} data={data}></TimerComponent>}
     </View>
   )
 }

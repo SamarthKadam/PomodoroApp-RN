@@ -6,12 +6,12 @@ import { CountdownCircleTimer } from 'react-native-countdown-circle-timer'
 import {useIsFocused, useNavigation } from '@react-navigation/native'
 import { updateTask } from '../store/database'
 
-
-export default function TimerComponent({data}) {
+export default function TimerComponent({data,showPop,showPopUp}) {
 
 
 
  const isFocused=useIsFocused();
+
 
 
 
@@ -25,6 +25,8 @@ export default function TimerComponent({data}) {
   {
     const minutes=Math.floor(dispMinutes);
     const seconds=Math.floor(dispSeconds);
+
+
 
     const time=minutes*60+seconds;
     await updateTask(data.id,time);
@@ -44,6 +46,11 @@ export default function TimerComponent({data}) {
   function PauseTimer()
   {
 
+    if(showPopUp==true)
+    {
+      showPop(false,data.interval);
+    }
+
     setIsPlaying((data)=>!data);
 
   }
@@ -62,7 +69,7 @@ export default function TimerComponent({data}) {
 
 
 
-  let value=1500-data.time
+  let value=60-data.time
 
 
   return (
@@ -70,7 +77,7 @@ export default function TimerComponent({data}) {
     <View style={styles.timerContainer}>
     <CountdownCircleTimer
     isPlaying={isPlaying}
-    duration={1500}
+    duration={60}
     initialRemainingTime={value}
     colors={[Color.secondary800]}
     colorsTime={[7]}
@@ -78,11 +85,22 @@ export default function TimerComponent({data}) {
     strokeWidth={18}
     trailColor={Color.primary400}
     rotation='counterclockwise'
-    onComplete={()=>{Alert.alert('Completed','Timer completed')}}
+    onComplete={()=>{
+      updateTaskTime()
+
+      console.log("execute zale");
+      showPop(true,data.interval);
+
+      setIsPlaying(false);
+      // Alert.alert('Completed','Timer completed')
+    }}
   >
     {({ remainingTime }) =>{
-      dispMinutes=(25-(remainingTime/60));
+      dispMinutes=(1-(remainingTime/60));
       dispSeconds=(60-(remainingTime%60));
+
+      if(remainingTime===0)
+      dispSeconds=0;
       const minutes=(Math.floor(remainingTime/60)).toString().padStart(2,'0');
       const seconds=(Math.floor(remainingTime%60)).toString().padStart(2,'0');
    return <Text style={styles.innerTextStyle}>{minutes}:{seconds}</Text>}

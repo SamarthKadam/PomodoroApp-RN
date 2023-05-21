@@ -22,7 +22,7 @@ export default function TaskList({id,title,time,priority,interval,deleteTaskHand
     }
 
   return (
-      <Pressable onPress={startTaskTimer.bind(this,id)} onLongPress={deleteTaskHandler.bind(this,id)} style={styles.container}>
+      <Pressable onLongPress={deleteTaskHandler.bind(this,id)} style={styles.container}>
         <View>
         <FontAwesome name="circle" size={24} color={color} />
         </View>
@@ -35,7 +35,7 @@ export default function TaskList({id,title,time,priority,interval,deleteTaskHand
             <Text style={[styles.smColor]}>25 min</Text>
         </View>
         <View>
-        {show && <AntDesign name="playcircleo" size={24} color={Color.secondary800} />}
+        {show &&<Pressable onPress={startTaskTimer.bind(this,id)}><AntDesign name="playcircleo" size={24} color={Color.secondary800} /></Pressable>}
         </View>
       </Pressable>
   )

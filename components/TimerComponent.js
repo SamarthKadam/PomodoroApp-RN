@@ -6,11 +6,14 @@ import { CountdownCircleTimer } from 'react-native-countdown-circle-timer'
 import {useIsFocused, useNavigation } from '@react-navigation/native'
 import { updateTask } from '../store/database'
 
-export default function TimerComponent({data,showPop,showPopUp}) {
+export default function TimerComponent({data,setShowPopUp,showPopUp}) {
+
 
 
 
  const isFocused=useIsFocused();
+
+ console.log("This is data.time",data.time);
 
 
 
@@ -20,6 +23,8 @@ export default function TimerComponent({data,showPop,showPopUp}) {
 
   const navigation=useNavigation();
   const[isPlaying,setIsPlaying]=useState(false);
+  const [key,setKey]=useState(0);
+
 
   async function updateTaskTime()
   {
@@ -32,11 +37,21 @@ export default function TimerComponent({data,showPop,showPopUp}) {
     await updateTask(data.id,time);
   }
 
+
+  async function resetTimer()
+  {
+    data.time=0;
+    await updateTask(data.id,0);
+  }
+
   useEffect(()=>{
     if(!isFocused)
     {
       setIsPlaying(false);
+      if(showPopUp===false)
+      {
       updateTaskTime()
+      }
     }
 
   },[isFocused])
@@ -45,10 +60,9 @@ export default function TimerComponent({data,showPop,showPopUp}) {
 
   function PauseTimer()
   {
-
     if(showPopUp==true)
     {
-      showPop(false,data.interval);
+      setShowPopUp(false,data.interval);
     }
 
     setIsPlaying((data)=>!data);
@@ -70,6 +84,7 @@ export default function TimerComponent({data,showPop,showPopUp}) {
 
 
   let value=60-data.time
+  console.log("value inside timer component",value);
 
 
   return (
@@ -78,6 +93,7 @@ export default function TimerComponent({data,showPop,showPopUp}) {
     <CountdownCircleTimer
     isPlaying={isPlaying}
     duration={60}
+    key={key}
     initialRemainingTime={value}
     colors={[Color.secondary800]}
     colorsTime={[7]}
@@ -86,13 +102,14 @@ export default function TimerComponent({data,showPop,showPopUp}) {
     trailColor={Color.primary400}
     rotation='counterclockwise'
     onComplete={()=>{
-      updateTaskTime()
-
-      console.log("execute zale");
-      showPop(true,data.interval);
-
+      if(showPopUp!==true)
+      {
+      resetTimer();
+      setKey((key)=>key+1);
+      setShowPopUp(true,data.interval);
       setIsPlaying(false);
-      // Alert.alert('Completed','Timer completed')
+
+      }
     }}
   >
     {({ remainingTime }) =>{

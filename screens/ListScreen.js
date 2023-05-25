@@ -61,6 +61,7 @@ export default function List() {
     async function loadTasks()
     {
       const tasks=await fetchTasks()
+      console.log(tasks);
       setTasks(tasks);
     }
     if(isFocused)

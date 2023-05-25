@@ -19,7 +19,7 @@ export default function Timer() {
  const[popMsg,setPopMsg]=useState('');
 
 
- console.log(showPopUp);
+
 
  useEffect(()=>{
   if(isFocused)
@@ -35,7 +35,6 @@ export default function Timer() {
 
  function showPop(val,interval)
  {
-  console.log("who fucking executed");
   setShowPopUp(val);
   setPopMsg(interval);
  }
@@ -44,7 +43,7 @@ export default function Timer() {
     <View style={styles.screen}>
       {showPopUp&&<Popup message={`Take a rest of ${popMsg} min then play the timer`}></Popup>}
       <TaskList id={data.id} show={false} title={data.title} time={data.time} priority={data.priority} interval={data.interval} startTaskTimer={()=>{}} deleteTaskHandler={()=>{}}></TaskList>
-     {showTimer&&<TimerComponent showPopUp={showPopUp} showPop={showPop} data={data}></TimerComponent>}
+     {showTimer&&<TimerComponent showPopUp={showPopUp} setShowPopUp={showPop} data={data}></TimerComponent>}
     </View>
   )
 }

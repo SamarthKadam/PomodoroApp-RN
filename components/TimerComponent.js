@@ -4,9 +4,9 @@ import Button from '../utils/Button'
 import { Color } from '../constants/Colors'
 import { CountdownCircleTimer } from 'react-native-countdown-circle-timer'
 import {useIsFocused, useNavigation } from '@react-navigation/native'
-import { updateTask } from '../store/database'
+import { updateTask} from '../store/database'
 
-export default function TimerComponent({data,setShowPopUp,showPopUp}) {
+export default function TimerComponent({data,setShowPopUp,showPopUp,updateStatus}) {
 
 
 
@@ -132,6 +132,7 @@ export default function TimerComponent({data,setShowPopUp,showPopUp}) {
     onComplete={()=>{
       if(showPopUp!==true)
       {
+      updateStatus(data.compltdinterval+1);
       resetTimer();
       setKey((key)=>key+1);
       setShowPopUp(true,data.interval);

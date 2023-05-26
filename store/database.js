@@ -158,3 +158,23 @@ export function getTotal()
     })
     return promise;
 }
+
+
+export function updateCmpCount(id,value)
+{
+    const promise=new Promise((resolve,reject)=>{
+        database.transaction((tx)=>{
+            tx.executeSql(`UPDATE tasks SET compltdinterval =${value} WHERE id=${id}`,
+            [],
+            (_,result)=>{
+                resolve();
+            },
+            (_,error)=>{
+                reject(error);
+            }
+            )
+        })
+    })
+
+    return promise;
+}

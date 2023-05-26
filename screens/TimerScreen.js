@@ -5,13 +5,15 @@ import TimerComponent from '../components/TimerComponent'
 import TaskList from '../components/TaskList'
 import { useIsFocused, useRoute } from '@react-navigation/native'
 import Popup from '../components/Popup'
+import { updateCmpCount } from '../store/database'
 
 export default function Timer() {
 
   const route=useRoute();
   const psdData=route.params.chosen;
-  data=psdData[0];
-  console.log("this is data",data);
+  const [data,setdata]=useState(psdData[0]);
+
+
  const isFocused=useIsFocused();
  const [showTimer,setShowTimer]=useState(false);
  const[showPopUp,setShowPopUp]=useState(false);
@@ -20,6 +22,7 @@ export default function Timer() {
  useEffect(()=>{
   if(isFocused)
   {
+    setdata(psdData[0]);
     setShowTimer(true);
   }
   else{
@@ -28,6 +31,24 @@ export default function Timer() {
  },[isFocused])
 
 
+
+
+ async function updatingStatus(count)
+ {
+  await updateCmpCount(data.id,count)
+ }
+
+
+
+ function updateStatus(count)
+ {
+  updatingStatus(count)
+  setdata((data)=>{
+    let temp=data;
+    temp.compltdinterval=count;
+    return temp;
+  })
+ }
 
  function showPop(val,interval)
  {
@@ -39,7 +60,7 @@ export default function Timer() {
     <View style={styles.screen}>
       {showPopUp&&<Popup message={`Take a rest of ${popMsg} min then play the timer`}></Popup>}
       <TaskList id={data.id} show={false} compltdinterval={data.compltdinterval} title={data.title} time={data.time} priority={data.priority} interval={data.interval} startTaskTimer={()=>{}} deleteTaskHandler={()=>{}}></TaskList>
-     {showTimer&&<TimerComponent showPopUp={showPopUp} setShowPopUp={showPop} data={data}></TimerComponent>}
+     {showTimer&&<TimerComponent updateStatus={updateStatus} showPopUp={showPopUp} setShowPopUp={showPop} data={data}></TimerComponent>}
     </View>
   )
 }

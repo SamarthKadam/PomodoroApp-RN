@@ -5,6 +5,7 @@ import Greet from '../utils/Greet'
 import StatsBar from '../components/StatsBar'
 import { getCompleted,getTotal } from '../store/database'
 import { useIsFocused } from '@react-navigation/native'
+import LoadingOverlay from '../components/LoadingOverlay'
 
 export default function StatsScreen() {
 
@@ -42,6 +43,11 @@ export default function StatsScreen() {
 
 
   const estimatedTime=((completedTask*25)/60).toFixed(1);
+
+  if(!totalTask || !completedTask)
+  {
+    return <LoadingOverlay message='Loading'></LoadingOverlay>
+  }
 
 
   return (

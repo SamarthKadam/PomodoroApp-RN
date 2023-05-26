@@ -1,0 +1,26 @@
+"filename", "language", "JavaScript", "JSON", "comment", "blank", "total"
+"d:\POMODOR TIMER\PomodoroTimer\App.js", "JavaScript", 70, 0, 0, 19, 89
+"d:\POMODOR TIMER\PomodoroTimer\app.json", "JSON", 0, 15, 16, 0, 31
+"d:\POMODOR TIMER\PomodoroTimer\babel.config.js", "JavaScript", 9, 0, 0, 1, 10
+"d:\POMODOR TIMER\PomodoroTimer\components\EmptyTask.js", "JavaScript", 39, 0, 0, 2, 41
+"d:\POMODOR TIMER\PomodoroTimer\components\FormInput.js", "JavaScript", 151, 0, 4, 27, 182
+"d:\POMODOR TIMER\PomodoroTimer\components\Popup.js", "JavaScript", 28, 0, 0, 4, 32
+"d:\POMODOR TIMER\PomodoroTimer\components\StartComp.js", "JavaScript", 63, 0, 0, 7, 70
+"d:\POMODOR TIMER\PomodoroTimer\components\StatsBar.js", "JavaScript", 33, 0, 0, 2, 35
+"d:\POMODOR TIMER\PomodoroTimer\components\TaskList.js", "JavaScript", 63, 0, 0, 6, 69
+"d:\POMODOR TIMER\PomodoroTimer\components\TimerComponent.js", "JavaScript", 146, 0, 0, 47, 193
+"d:\POMODOR TIMER\PomodoroTimer\constants\Colors.js", "JavaScript", 10, 0, 1, 1, 12
+"d:\POMODOR TIMER\PomodoroTimer\package-lock.json", "JSON", 0, 24376, 0, 1, 24377
+"d:\POMODOR TIMER\PomodoroTimer\package.json", "JSON", 0, 34, 0, 1, 35
+"d:\POMODOR TIMER\PomodoroTimer\screens\AddTask.js", "JavaScript", 25, 0, 0, 5, 30
+"d:\POMODOR TIMER\PomodoroTimer\screens\LandingPageScreen.js", "JavaScript", 10, 0, 0, 3, 13
+"d:\POMODOR TIMER\PomodoroTimer\screens\ListScreen.js", "JavaScript", 119, 0, 0, 29, 148
+"d:\POMODOR TIMER\PomodoroTimer\screens\StatsScreen.js", "JavaScript", 51, 0, 0, 17, 68
+"d:\POMODOR TIMER\PomodoroTimer\screens\TimerScreen.js", "JavaScript", 60, 0, 0, 14, 74
+"d:\POMODOR TIMER\PomodoroTimer\store\database.js", "JavaScript", 151, 0, 0, 29, 180
+"d:\POMODOR TIMER\PomodoroTimer\utils\Button.js", "JavaScript", 24, 0, 0, 2, 26
+"d:\POMODOR TIMER\PomodoroTimer\utils\Greet.js", "JavaScript", 16, 0, 0, 2, 18
+"d:\POMODOR TIMER\PomodoroTimer\utils\Heading.js", "JavaScript", 18, 0, 0, 2, 20
+"d:\POMODOR TIMER\PomodoroTimer\utils\IconButton.js", "JavaScript", 13, 0, 0, 1, 14
+"d:\POMODOR TIMER\PomodoroTimer\utils\PressComp.js", "JavaScript", 9, 0, 0, 1, 10
+"Total", "-", 1108, 24425, 21, 223, 25777

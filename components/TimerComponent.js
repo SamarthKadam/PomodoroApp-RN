@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet} from 'react-native'
+import { View, Text, StyleSheet,BackHandler,Alert} from 'react-native'
 import React, { useEffect, useState } from 'react'
 import Button from '../utils/Button'
 import { Color } from '../constants/Colors'
@@ -10,10 +10,35 @@ export default function TimerComponent({data,setShowPopUp,showPopUp}) {
 
 
 
+  useEffect(() => {
+    const backAction = () => {
+
+      setIsPlaying(false);
+      Alert.alert('Hold on!', 'Are you sure you want to go back?', [
+        {
+          text: 'Cancel',
+          onPress: () => null,
+          style: 'cancel',
+        },
+        {text: 'YES', onPress: () => BackHandler.exitApp()},
+      ]);
+      return true;
+    };
+
+    const backHandler = BackHandler.addEventListener(
+      'hardwareBackPress',
+      backAction,
+    );
+
+    return () => backHandler.remove();
+  }, []);
+
+
+
+
 
  const isFocused=useIsFocused();
 
- console.log("This is data.time",data.time);
 
 
 
@@ -72,7 +97,10 @@ export default function TimerComponent({data,setShowPopUp,showPopUp}) {
   function exitTimer()
   {
     setIsPlaying(false);
+    if(showPopUp===false)
+    {
     updateTaskTime();
+    }
     navigation.navigate('ListAdd');
   }
 
@@ -84,7 +112,7 @@ export default function TimerComponent({data,setShowPopUp,showPopUp}) {
 
 
   let value=60-data.time
-  console.log("value inside timer component",value);
+
 
 
   return (

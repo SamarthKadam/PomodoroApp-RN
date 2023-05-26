@@ -61,7 +61,6 @@ export default function List() {
     async function loadTasks()
     {
       const tasks=await fetchTasks()
-      console.log(tasks);
       setTasks(tasks);
     }
     if(isFocused)
@@ -81,6 +80,7 @@ export default function List() {
     priority:item.priority,
     time:item.time,
     interval:item.interval,
+    compltdinterval:item.compltdinterval,
     deleteTaskHandler:deleteTaskHandler,
     startTaskTimer:startTaskTimer,
     show:true

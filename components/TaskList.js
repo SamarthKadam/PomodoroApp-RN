@@ -4,7 +4,7 @@ import { Color } from '../constants/Colors'
 import { FontAwesome } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
 
-export default function TaskList({id,title,time,priority,interval,deleteTaskHandler,startTaskTimer,show}) {
+export default function TaskList({id,title,time,priority,compltdinterval,interval,deleteTaskHandler,startTaskTimer,show}) {
 
 
     let color;
@@ -31,7 +31,7 @@ export default function TaskList({id,title,time,priority,interval,deleteTaskHand
             <Text style={[styles.smColor]}>{Math.floor(time/60)} Minutes</Text>
         </View>
         <View style={styles.timercontainer}>
-            <Text style={styles.textColor}>1/{interval}</Text>
+            <Text style={styles.textColor}>{compltdinterval}/{interval}</Text>
             <Text style={[styles.smColor]}>25 min</Text>
         </View>
         <View>

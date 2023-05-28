@@ -18,7 +18,8 @@ export function init()
                 interval INTEGER NOT NULL,
                 time INTEGER NOT NULL,
                 compltdinterval INTEGER NOT NULL,
-                completed BOOLEAN NOT NULL
+                completed BOOLEAN NOT NULL,
+                showpopup BOOLEAN NOT NULL
             )`,
             [],
             ()=>{
@@ -39,8 +40,8 @@ export function insertTask(task)
 {
     const promise=new Promise((resolve,reject)=>{
         database.transaction((tx)=>{
-            tx.executeSql(`INSERT INTO tasks (title,interval,time,compltdinterval,completed,priority) VALUES (?,?,?,?,?,?)`,
-            [task.title,task.interval,task.time,task.compltdinterval,task.completed,task.priority],
+            tx.executeSql(`INSERT INTO tasks (title,interval,time,compltdinterval,completed,priority,showpopup) VALUES (?,?,?,?,?,?,?)`,
+            [task.title,task.interval,task.time,task.compltdinterval,task.completed,task.priority,false],
             (result)=>{
                 resolve(result);
             },
@@ -67,7 +68,7 @@ export function fetchTasks()
 
                 for(const item of result.rows._array)
                 {
-                    tasks.push({completed:item.completed,compltdinterval:item.compltdinterval,interval:item.interval,time:item.time,title:item.title,id:item.id,priority:item.priority});
+                    tasks.push({completed:item.completed,compltdinterval:item.compltdinterval,interval:item.interval,time:item.time,title:item.title,id:item.id,priority:item.priority,showpopup:item.showpopup});
                 }
                 resolve(tasks);
             },
@@ -165,6 +166,27 @@ export function updateCmpCount(id,value)
     const promise=new Promise((resolve,reject)=>{
         database.transaction((tx)=>{
             tx.executeSql(`UPDATE tasks SET compltdinterval =${value} WHERE id=${id}`,
+            [],
+            (_,result)=>{
+                resolve();
+            },
+            (_,error)=>{
+                reject(error);
+            }
+            )
+        })
+    })
+
+    return promise;
+}
+
+
+export function updatePopStatus(id,value)
+{
+    const val=value===true?1:0;
+    const promise=new Promise((resolve,reject)=>{
+        database.transaction((tx)=>{
+            tx.executeSql(`UPDATE tasks SET showpopup =${val} WHERE id=${id}`,
             [],
             (_,result)=>{
                 resolve();

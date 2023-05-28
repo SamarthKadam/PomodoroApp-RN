@@ -6,9 +6,12 @@ import { CountdownCircleTimer } from 'react-native-countdown-circle-timer'
 import {useIsFocused, useNavigation } from '@react-navigation/native'
 import { updateTask} from '../store/database'
 
-export default function TimerComponent({data,setShowPopUp,showPopUp,updateStatus}) {
+export default function TimerComponent({popupUpdation,data,setShowPopUp,showPopUp,updateStatus}) {
 
 
+  console.log(data);
+
+  let value=60-data.time;
 
   useEffect(() => {
     const backAction = () => {
@@ -73,9 +76,9 @@ export default function TimerComponent({data,setShowPopUp,showPopUp,updateStatus
     if(!isFocused)
     {
       setIsPlaying(false);
-      if(showPopUp===false)
+      if(showPopUp===false && dispSeconds!==60)
       {
-      updateTaskTime()
+      updateTaskTime();
       }
     }
 
@@ -87,6 +90,7 @@ export default function TimerComponent({data,setShowPopUp,showPopUp,updateStatus
   {
     if(showPopUp==true)
     {
+      popupUpdation(false);
       setShowPopUp(false,data.interval);
     }
 
@@ -94,24 +98,24 @@ export default function TimerComponent({data,setShowPopUp,showPopUp,updateStatus
 
   }
 
+
+
+
+
+
+
+  
   function exitTimer()
   {
     setIsPlaying(false);
-    if(showPopUp===false)
-    {
-    updateTaskTime();
-    }
+    // if(showPopUp===false && value!==60);
+    // {
+    // updateTaskTime();
+    // }
     navigation.navigate('ListAdd');
   }
 
 
-
-
-
-
-
-
-  let value=60-data.time
 
 
 
@@ -134,6 +138,7 @@ export default function TimerComponent({data,setShowPopUp,showPopUp,updateStatus
       {
       updateStatus(data.compltdinterval+1);
       resetTimer();
+      popupUpdation(true);
       setKey((key)=>key+1);
       setShowPopUp(true,data.interval);
       setIsPlaying(false);

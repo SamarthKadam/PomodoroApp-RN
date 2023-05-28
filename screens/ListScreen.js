@@ -15,6 +15,9 @@ import { deleteTask } from '../store/database'
 export default function List() {
 
 
+
+
+
   const [tasks,setTasks]=useState([]);
   const isFocused=useIsFocused()
   const navigation=useNavigation();
@@ -60,7 +63,8 @@ export default function List() {
   useEffect(()=>{
     async function loadTasks()
     {
-      const tasks=await fetchTasks()
+      const tasks=await fetchTasks();
+      console.log(tasks);
       setTasks(tasks);
     }
     if(isFocused)

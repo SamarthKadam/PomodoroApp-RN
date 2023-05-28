@@ -5,7 +5,7 @@ import TimerComponent from '../components/TimerComponent'
 import TaskList from '../components/TaskList'
 import { useIsFocused, useRoute } from '@react-navigation/native'
 import Popup from '../components/Popup'
-import { updateCmpCount } from '../store/database'
+import { updateCmpCount,updatePopStatus} from '../store/database'
 
 export default function Timer() {
 
@@ -13,16 +13,20 @@ export default function Timer() {
   const psdData=route.params.chosen;
   const [data,setdata]=useState(psdData[0]);
 
-
  const isFocused=useIsFocused();
  const [showTimer,setShowTimer]=useState(false);
- const[showPopUp,setShowPopUp]=useState(false);
- const[popMsg,setPopMsg]=useState('');
+ const[showPopUp,setShowPopUp]=useState();
+
 
  useEffect(()=>{
   if(isFocused)
   {
     setdata(psdData[0]);
+    const val=psdData[0].showpopup===1?true:false;
+    console.log("the interval is",psdData[0].interval)
+    popInt=psdData[0].interval;
+    console.log("This is data fetched from backend thatt is shopop",val);
+    setShowPopUp(val);
     setShowTimer(true);
   }
   else{
@@ -50,17 +54,26 @@ export default function Timer() {
   })
  }
 
+
+
+
+
+async function popupUpdation(val)
+ {
+  await updatePopStatus(data.id,val)
+ }
+
  function showPop(val,interval)
  {
   setShowPopUp(val);
-  setPopMsg(interval);
  }
+
 
   return (
     <View style={styles.screen}>
-      {showPopUp&&<Popup message={`Take a rest of ${popMsg} min then play the timer`}></Popup>}
+      {showPopUp&&<Popup message={`Take a rest of ${psdData[0].interval} min then play the timer`}></Popup>}
       <TaskList id={data.id} show={false} compltdinterval={data.compltdinterval} title={data.title} time={data.time} priority={data.priority} interval={data.interval} startTaskTimer={()=>{}} deleteTaskHandler={()=>{}}></TaskList>
-     {showTimer&&<TimerComponent updateStatus={updateStatus} showPopUp={showPopUp} setShowPopUp={showPop} data={data}></TimerComponent>}
+     {showTimer&&<TimerComponent popupUpdation={popupUpdation} updateStatus={updateStatus} showPopUp={showPopUp} setShowPopUp={showPop} data={data}></TimerComponent>}
     </View>
   )
 }

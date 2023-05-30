@@ -23,9 +23,6 @@ export default function Timer() {
   {
     setdata(psdData[0]);
     const val=psdData[0].showpopup===1?true:false;
-    console.log("the interval is",psdData[0].interval)
-    popInt=psdData[0].interval;
-    console.log("This is data fetched from backend thatt is shopop",val);
     setShowPopUp(val);
     setShowTimer(true);
   }
@@ -71,7 +68,7 @@ async function popupUpdation(val)
 
   return (
     <View style={styles.screen}>
-      {showPopUp&&<Popup message={`Take a rest of ${psdData[0].interval} min then play the timer`}></Popup>}
+      {showPopUp&&<Popup message={`Take a rest of ${psdData[0].breaktime} min then play the timer`}></Popup>}
       <TaskList id={data.id} show={false} compltdinterval={data.compltdinterval} title={data.title} time={data.time} priority={data.priority} interval={data.interval} startTaskTimer={()=>{}} deleteTaskHandler={()=>{}}></TaskList>
      {showTimer&&<TimerComponent popupUpdation={popupUpdation} updateStatus={updateStatus} showPopUp={showPopUp} setShowPopUp={showPop} data={data}></TimerComponent>}
     </View>

@@ -19,7 +19,8 @@ export function init()
                 time INTEGER NOT NULL,
                 compltdinterval INTEGER NOT NULL,
                 completed BOOLEAN NOT NULL,
-                showpopup BOOLEAN NOT NULL
+                showpopup BOOLEAN NOT NULL,
+                breaktime INTEGER NOT NULL
             )`,
             [],
             ()=>{
@@ -40,8 +41,8 @@ export function insertTask(task)
 {
     const promise=new Promise((resolve,reject)=>{
         database.transaction((tx)=>{
-            tx.executeSql(`INSERT INTO tasks (title,interval,time,compltdinterval,completed,priority,showpopup) VALUES (?,?,?,?,?,?,?)`,
-            [task.title,task.interval,task.time,task.compltdinterval,task.completed,task.priority,false],
+            tx.executeSql(`INSERT INTO tasks (title,interval,time,compltdinterval,completed,priority,showpopup,breaktime) VALUES (?,?,?,?,?,?,?,?)`,
+            [task.title,task.interval,task.time,task.compltdinterval,task.completed,task.priority,false,task.breaktime],
             (result)=>{
                 resolve(result);
             },
@@ -68,7 +69,7 @@ export function fetchTasks()
 
                 for(const item of result.rows._array)
                 {
-                    tasks.push({completed:item.completed,compltdinterval:item.compltdinterval,interval:item.interval,time:item.time,title:item.title,id:item.id,priority:item.priority,showpopup:item.showpopup});
+                    tasks.push({completed:item.completed,compltdinterval:item.compltdinterval,interval:item.interval,time:item.time,title:item.title,id:item.id,priority:item.priority,showpopup:item.showpopup,breaktime:item.breaktime});
                 }
                 resolve(tasks);
             },

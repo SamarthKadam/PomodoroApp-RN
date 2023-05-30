@@ -36,7 +36,7 @@ export default function FormInput({onaddTask}) {
       return 
     }
 
-    onaddTask({title:taskName,interval:times,time:0,compltdinterval:0,completed:false,priority:activePriority})
+    onaddTask({title:taskName,interval:times,time:0,compltdinterval:0,completed:false,priority:activePriority,breaktime:breaktime})
     // setBreakTime('');
     // setTimes('');
     // setTaskName('');

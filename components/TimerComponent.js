@@ -56,6 +56,7 @@ export default function TimerComponent({popupUpdation,data,setShowPopUp,showPopU
 
   async function updateTaskTime()
   {
+    console.log("update zaina");
     const minutes=Math.floor(dispMinutes);
     const seconds=Math.floor(dispSeconds);
 
@@ -93,7 +94,8 @@ export default function TimerComponent({popupUpdation,data,setShowPopUp,showPopU
       popupUpdation(false);
       setShowPopUp(false,data.interval);
     }
-
+    
+    updateTaskTime();
     setIsPlaying((data)=>!data);
 
   }

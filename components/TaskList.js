@@ -3,8 +3,9 @@ import React from 'react'
 import { Color } from '../constants/Colors'
 import { FontAwesome } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
+import { MaterialIcons } from '@expo/vector-icons'; 
 
-export default function TaskList({id,title,time,priority,compltdinterval,interval,deleteTaskHandler,startTaskTimer,show}) {
+export default function TaskList({id,title,time,priority,compltdinterval,interval,deleteTaskHandler,startTaskTimer,show,completed,deleteTaskFunction}) {
 
 
     let color;
@@ -35,7 +36,8 @@ export default function TaskList({id,title,time,priority,compltdinterval,interva
             <Text style={[styles.smColor]}>25 min</Text>
         </View>
         <View>
-        {show &&<Pressable onPress={startTaskTimer.bind(this,id)}><AntDesign name="playcircleo" size={24} color={Color.secondary800} /></Pressable>}
+        {show&&!completed&&<Pressable onPress={startTaskTimer.bind(this,id)}><AntDesign name="playcircleo" size={24} color={Color.secondary800} /></Pressable>}
+        {completed?<MaterialIcons onPress={deleteTaskFunction.bind(this,id)} name='cancel' size={24} color='white'></MaterialIcons>:null}
         </View>
       </Pressable>
   )

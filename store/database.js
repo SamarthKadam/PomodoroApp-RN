@@ -201,3 +201,22 @@ export function updatePopStatus(id,value)
 
     return promise;
 }
+
+export function isCompletedUpdated(id)
+{
+    const promise=new Promise((resolve,reject)=>{
+        database.transaction((tx)=>{
+            tx.executeSql(`UPDATE tasks SET completed =1 WHERE id=${id}`,
+            [],
+            (_,result)=>{
+                resolve();
+            },
+            (_,error)=>{
+                reject(error);
+            }
+            )
+        })
+    })
+
+    return promise;
+}

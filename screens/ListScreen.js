@@ -19,6 +19,7 @@ export default function List() {
 
 
   const [tasks,setTasks]=useState([]);
+  const [completedTasks,setCompletedTasks]=useState([]);
   const isFocused=useIsFocused()
   const navigation=useNavigation();
 
@@ -31,6 +32,10 @@ export default function List() {
     setTasks((tasks)=>{
 
       return tasks.filter((task)=>task.id!==id)
+    })
+
+    setCompletedTasks((tasks)=>{
+      return tasks.filter((task)=>task.id!==id);
     })
    await deleteTask(id);
   }
@@ -64,8 +69,11 @@ export default function List() {
     async function loadTasks()
     {
       const tasks=await fetchTasks();
-      console.log(tasks);
-      setTasks(tasks);
+      const pendingTasks=tasks.filter((data)=>data.completed===0)
+      const completedTasks=tasks.filter((data)=>data.completed===1);
+      setTasks(pendingTasks);
+      setCompletedTasks(completedTasks);
+      console.log(pendingTasks);
     }
     if(isFocused)
     {
@@ -83,9 +91,11 @@ export default function List() {
     title:item.title,
     priority:item.priority,
     time:item.time,
+    completed:item.completed,
     interval:item.interval,
     compltdinterval:item.compltdinterval,
     deleteTaskHandler:deleteTaskHandler,
+    deleteTaskFunction:deleteTaskFunction,
     startTaskTimer:startTaskTimer,
     show:true
 
@@ -108,16 +118,17 @@ export default function List() {
     <View style={styles.screen}>
       <Greet>Today</Greet>
       <Heading>All Tasks</Heading>
-     {tasks.length>0?<View>
+     {tasks.length>0||completedTasks.length>0?<View>
       <View style={styles.tasklistContainer}>
         <FlatList data={tasks} keyExtractor={(item)=>item.id}  renderItem={renderTasks}></FlatList>
       </View>
       <Heading style={styles.padbot}>Completed</Heading>
       <View style={styles.completedList}>
+      <FlatList data={completedTasks} keyExtractor={(item)=>item.id}  renderItem={renderTasks}></FlatList>
       </View>
       </View>
       :null}
-      {tasks.length===0?<EmptyTask></EmptyTask>:null}
+      {tasks.length===0||completedTasks.length>0?<EmptyTask></EmptyTask>:null}
       <Button onPress={addTaskHandler} style={styles.styleButton}>+ Add new task</Button>
     </View>
   )

@@ -6,10 +6,13 @@ import TaskList from '../components/TaskList'
 import { useIsFocused, useRoute } from '@react-navigation/native'
 import Popup from '../components/Popup'
 import { updateCmpCount,updatePopStatus} from '../store/database'
+import { useNavigation } from '@react-navigation/native'
+import { isCompletedUpdated } from '../store/database'
 
 export default function Timer() {
 
   const route=useRoute();
+  const navigation=useNavigation();
   const psdData=route.params.chosen;
   const [data,setdata]=useState(psdData[0]);
 
@@ -39,16 +42,30 @@ export default function Timer() {
   await updateCmpCount(data.id,count)
  }
 
+async function updatingIsCompletedStatus()
+{
+  await isCompletedUpdated(data.id);
+}
+
 
 
  function updateStatus(count)
  {
+
   updatingStatus(count)
   setdata((data)=>{
     let temp=data;
     temp.compltdinterval=count;
     return temp;
   })
+
+  if(data.interval===count)
+  {
+    updatingIsCompletedStatus();
+    return navigation.navigate('ListAdd');
+  }
+
+
  }
 
 

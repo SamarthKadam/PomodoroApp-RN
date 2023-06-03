@@ -5,11 +5,11 @@ import { Color } from '../constants/Colors'
 import { CountdownCircleTimer } from 'react-native-countdown-circle-timer'
 import {useIsFocused, useNavigation } from '@react-navigation/native'
 import { updateTask} from '../store/database'
+import { playSound } from '../services/playSound'
 
 export default function TimerComponent({popupUpdation,data,setShowPopUp,showPopUp,updateStatus}) {
 
 
-  console.log(data);
 
   let value=60-data.time;
 
@@ -56,7 +56,6 @@ export default function TimerComponent({popupUpdation,data,setShowPopUp,showPopU
 
   async function updateTaskTime()
   {
-    console.log("update zaina");
     const minutes=Math.floor(dispMinutes);
     const seconds=Math.floor(dispSeconds);
 
@@ -79,6 +78,7 @@ export default function TimerComponent({popupUpdation,data,setShowPopUp,showPopU
       setIsPlaying(false);
       if(showPopUp===false && dispSeconds!==60)
       {
+      console.log("update zale ni?");
       updateTaskTime();
       }
     }
@@ -138,6 +138,7 @@ export default function TimerComponent({popupUpdation,data,setShowPopUp,showPopU
     onComplete={()=>{
       if(showPopUp!==true)
       {
+      playSound();
       updateStatus(data.compltdinterval+1);
       resetTimer();
       popupUpdation(true);

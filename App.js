@@ -37,7 +37,7 @@ function ListAdd({navigation})
 function HomePage()
 {
   return <Tab.Navigator  screenOptions={{tabBarItemStyle:{backgroundColor:Color.primary600},headerShown:false,tabBarShowLabel:false,tabBarActiveTintColor:'#6E7DFF'}}>
-     <Tab.Screen name='ListAdd' options={{tabBarStyle:{borderTopWidth:0,height:80},tabBarIcon:({color})=><FontAwesome name="th-list" size={30} color={color} />}} component={ListAdd}></Tab.Screen>
+     <Tab.Screen  listeners={{tabPress:e=>{e.preventDefault()}}} name='ListAdd' options={{tabBarStyle:{borderTopWidth:0,height:80},tabBarIcon:({color})=><FontAwesome name="th-list" size={30} color={color} />}} component={ListAdd}></Tab.Screen>
      <Tab.Screen listeners={{tabPress:e=>{e.preventDefault()}}} name='Timer' options={{tabBarStyle:{borderTopWidth:0,height:80},tabBarIcon:({color})=><MaterialCommunityIcons name="timer" size={30} color={color} />}} component={Timer}></Tab.Screen>
      <Tab.Screen name='Stats'options={{tabBarStyle:{borderTopWidth:0,height:80},tabBarIcon:({color})=><AntDesign name="piechart" size={30} color={color} />}} component={StatsScreen}></Tab.Screen>
   </Tab.Navigator>

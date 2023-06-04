@@ -11,7 +11,8 @@ export default function TimerComponent({popupUpdation,data,setShowPopUp,showPopU
 
 
 
-  let value=60-data.time;
+  let value=120-data.time;
+  let isVerification=120;
 
   useEffect(() => {
     const backAction = () => {
@@ -56,9 +57,12 @@ export default function TimerComponent({popupUpdation,data,setShowPopUp,showPopU
 
   async function updateTaskTime()
   {
-    const minutes=Math.floor(dispMinutes);
-    const seconds=Math.floor(dispSeconds);
 
+    const minutes=Math.floor(dispMinutes);
+    let seconds=Math.floor(dispSeconds);
+
+    if(seconds===60)
+    seconds=0;
 
 
     const time=minutes*60+seconds;
@@ -73,12 +77,12 @@ export default function TimerComponent({popupUpdation,data,setShowPopUp,showPopU
   }
 
   useEffect(()=>{
+
     if(!isFocused)
     {
       setIsPlaying(false);
-      if(showPopUp===false && dispSeconds!==60)
+      if(showPopUp===false && isVerification!==120)
       {
-      console.log("update zale ni?");
       updateTaskTime();
       }
     }
@@ -126,7 +130,7 @@ export default function TimerComponent({popupUpdation,data,setShowPopUp,showPopU
     <View style={styles.timerContainer}>
     <CountdownCircleTimer
     isPlaying={isPlaying}
-    duration={60}
+    duration={120}
     key={key}
     initialRemainingTime={value}
     colors={[Color.secondary800]}
@@ -150,7 +154,8 @@ export default function TimerComponent({popupUpdation,data,setShowPopUp,showPopU
     }}
   >
     {({ remainingTime }) =>{
-      dispMinutes=(1-(remainingTime/60));
+      isVerification=remainingTime;
+      dispMinutes=(2-(remainingTime/60));
       dispSeconds=(60-(remainingTime%60));
 
       if(remainingTime===0)

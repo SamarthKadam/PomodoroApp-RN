@@ -128,7 +128,7 @@ export function getCompleted()
 {
     const promise=new Promise((resolve,reject)=>{
         database.transaction((tx)=>{
-            tx.executeSql('SELECT COUNT(id) FROM tasks WHERE completed=0',
+            tx.executeSql('SELECT COUNT(id) FROM tasks WHERE completed=1',
             [],
             (_,result)=>{
                 const data=(result.rows._array[0]["COUNT(id)"]);

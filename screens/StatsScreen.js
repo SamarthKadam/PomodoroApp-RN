@@ -44,7 +44,7 @@ export default function StatsScreen() {
 
   const estimatedTime=((completedTask*25)/60).toFixed(1);
 
-  if(!totalTask || !completedTask)
+  if((!totalTask&&totalTask!==0) || (!completedTask&& completedTask!==0))
   {
     return <LoadingOverlay message='Loading'></LoadingOverlay>
   }

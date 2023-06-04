@@ -10,6 +10,7 @@ import { useNavigation } from '@react-navigation/native'
 import { fetchTasks } from '../store/database'
 import { useIsFocused } from '@react-navigation/native'
 import { deleteTask } from '../store/database'
+import CompletedStatus from '../components/CompletedStatus'
 
 
 export default function List() {
@@ -73,7 +74,6 @@ export default function List() {
       const completedTasks=tasks.filter((data)=>data.completed===1);
       setTasks(pendingTasks);
       setCompletedTasks(completedTasks);
-      console.log(pendingTasks);
     }
     if(isFocused)
     {
@@ -112,6 +112,13 @@ export default function List() {
 
 
 
+ let content=<FlatList data={tasks} keyExtractor={(item)=>item.id}  renderItem={renderTasks}></FlatList>
+
+if(tasks.length===0)
+{
+  content=<CompletedStatus></CompletedStatus>
+}
+
 
 
   return (
@@ -119,8 +126,8 @@ export default function List() {
       <Greet>Today</Greet>
       <Heading>All Tasks</Heading>
      {tasks.length>0||completedTasks.length>0?<View>
-      <View style={styles.tasklistContainer}>
-        <FlatList data={tasks} keyExtractor={(item)=>item.id}  renderItem={renderTasks}></FlatList>
+     <View style={styles.tasklistContainer}>
+      {content}
       </View>
       <Heading style={styles.padbot}>Completed</Heading>
       <View style={styles.completedList}>

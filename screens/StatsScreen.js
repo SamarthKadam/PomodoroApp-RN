@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { Color } from '../constants/Colors'
 import Greet from '../utils/Greet'
 import StatsBar from '../components/StatsBar'
-import { getCompleted,getTotal } from '../store/database'
+import { getCompleted,getTotal,fetchTasks } from '../store/database'
 import { useIsFocused } from '@react-navigation/native'
 import LoadingOverlay from '../components/LoadingOverlay'
 
@@ -13,6 +13,7 @@ export default function StatsScreen() {
   const isFocused=useIsFocused();
   const[completedTask,setCompletedTask]=useState()
   const[totalTask,setTotalTask]=useState()
+  const[remainingDuration,setRemainingDuration]=useState();
 
   async function getCompletedTasks()
   {
@@ -28,6 +29,26 @@ export default function StatsScreen() {
 
   }
 
+  async function getRemainingDuration()
+  {
+    const data=await fetchTasks();
+    console.log(data);
+    const filtData=data.filter((val)=>val.completed!==1);
+
+    console.log(filtData);
+
+    let dur=0
+    filtData.forEach((data)=>{
+      dur+=(240-data.time)+(data.interval-data.compltdinterval-1)*240;
+    })
+
+    console.log(dur);
+
+    setRemainingDuration(dur);
+    // console.log(remainingDuration);
+
+  }
+
 
   useEffect(()=>{
 
@@ -35,16 +56,14 @@ export default function StatsScreen() {
     {
       getCompletedTasks();
       getTotalTasks();
+      getRemainingDuration();
     }
 
   },[isFocused])
 
 
 
-
-  const estimatedTime=((completedTask*25)/60).toFixed(1);
-
-  if((!totalTask&&totalTask!==0) || (!completedTask&& completedTask!==0))
+  if((!totalTask&&totalTask!==0) || (!completedTask&& completedTask!==0) || (!remainingDuration&& remainingDuration!==0))
   {
     return <LoadingOverlay message='Loading'></LoadingOverlay>
   }
@@ -54,7 +73,7 @@ export default function StatsScreen() {
     <View style={styles.screen}>
       <Greet>Status</Greet>
       <View style={styles.statsBarContainer}>
-      <StatsBar val={estimatedTime} description='Estimated time (h)'></StatsBar>
+      <StatsBar val={remainingDuration} description='Estimated time (sec)'></StatsBar>
       <StatsBar val={totalTask} description='Total tasks in project '></StatsBar>
       <StatsBar val={completedTask} description='Completed tasks'></StatsBar>
       </View>

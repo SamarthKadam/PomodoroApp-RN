@@ -114,6 +114,7 @@ export default function List() {
 
  let content=<FlatList data={tasks} keyExtractor={(item)=>item.id}  renderItem={renderTasks}></FlatList>
 
+
 if(tasks.length===0)
 {
   content=<CompletedStatus></CompletedStatus>

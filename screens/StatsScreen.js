@@ -44,7 +44,7 @@ export default function StatsScreen() {
 
     console.log(dur);
 
-    setRemainingDuration(dur);
+    setRemainingDuration(((dur/60)/60).toFixed(2));
     // console.log(remainingDuration);
 
   }

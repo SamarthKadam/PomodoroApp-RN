@@ -34,7 +34,7 @@ function ListAdd({navigation})
 }
 
 
-function HomePage()
+export function HomePage()
 {
   return <Tab.Navigator  screenOptions={{tabBarItemStyle:{backgroundColor:Color.primary600},headerShown:false,tabBarShowLabel:false,tabBarActiveTintColor:'#6E7DFF'}}>
      <Tab.Screen  listeners={{tabPress:e=>{e.preventDefault()}}} name='ListAdd' options={{tabBarStyle:{borderTopWidth:0,height:80},tabBarIcon:({color})=><FontAwesome name="th-list" size={30} color={color} />}} component={ListAdd}></Tab.Screen>

@@ -11,8 +11,10 @@ export default function TimerComponent({popupUpdation,data,setShowPopUp,showPopU
 
 
 
-  let value=240-data.time;
-  let isVerification=240;
+  const PomoTime=25*60;
+
+  let value=PomoTime-data.time;
+  let isVerification=PomoTime;
 
   useEffect(() => {
     const backAction = () => {
@@ -81,7 +83,7 @@ export default function TimerComponent({popupUpdation,data,setShowPopUp,showPopU
     if(!isFocused)
     {
       setIsPlaying(false);
-      if(showPopUp===false && isVerification!==240)
+      if(showPopUp===false && isVerification!==PomoTime)
       {
       updateTaskTime();
       }
@@ -130,7 +132,7 @@ export default function TimerComponent({popupUpdation,data,setShowPopUp,showPopU
     <View style={styles.timerContainer}>
     <CountdownCircleTimer
     isPlaying={isPlaying}
-    duration={240}
+    duration={PomoTime}
     key={key}
     initialRemainingTime={value}
     colors={[Color.secondary800]}
@@ -155,7 +157,7 @@ export default function TimerComponent({popupUpdation,data,setShowPopUp,showPopU
   >
     {({ remainingTime }) =>{
       isVerification=remainingTime;
-      dispMinutes=(4-(remainingTime/60));
+      dispMinutes=(25-(remainingTime/60));
       dispSeconds=(60-(remainingTime%60));
 
       if(remainingTime===0)

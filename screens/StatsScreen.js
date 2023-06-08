@@ -32,20 +32,15 @@ export default function StatsScreen() {
   async function getRemainingDuration()
   {
     const data=await fetchTasks();
-    console.log(data);
     const filtData=data.filter((val)=>val.completed!==1);
 
-    console.log(filtData);
 
     let dur=0
     filtData.forEach((data)=>{
-      dur+=(240-data.time)+(data.interval-data.compltdinterval-1)*240;
+      dur+=(1500-data.time)+(data.interval-data.compltdinterval-1)*1500;
     })
-
-    console.log(dur);
-
+    
     setRemainingDuration(((dur/60)/60).toFixed(2));
-    // console.log(remainingDuration);
 
   }
 
@@ -73,7 +68,7 @@ export default function StatsScreen() {
     <View style={styles.screen}>
       <Greet>Status</Greet>
       <View style={styles.statsBarContainer}>
-      <StatsBar val={remainingDuration} description='Estimated time (sec)'></StatsBar>
+      <StatsBar val={remainingDuration} description='Estimated time (hrs)'></StatsBar>
       <StatsBar val={totalTask} description='Total tasks in project '></StatsBar>
       <StatsBar val={completedTask} description='Completed tasks'></StatsBar>
       </View>

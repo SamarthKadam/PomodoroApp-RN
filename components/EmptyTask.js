@@ -1,6 +1,8 @@
 import { View, Text,Image,StyleSheet} from 'react-native'
 import React from 'react'
 
+//This is component to be rendered when tasks are not added yet
+
 export default function EmptyTask() {
   return (
     <View style={styles.container}>

@@ -13,11 +13,14 @@ import { Alert } from 'react-native'
 export default function FormInput({onaddTask}) {
 
   const navigation=useNavigation();
+  //navigation which is imported from useNavigation used for moving between screens
 
   const[activePriority,setActivePriority]=useState(-1);
   const[taskName,setTaskName]=useState();
   const[times,setTimes]=useState();
   const[breaktime,setBreakTime]=useState();
+
+  //Above are input variables to store input given by the user using useState.
 
 
 
@@ -37,11 +40,9 @@ export default function FormInput({onaddTask}) {
     }
 
     onaddTask({title:taskName,interval:times,time:0,compltdinterval:0,completed:false,priority:activePriority,breaktime:breaktime})
-    // setBreakTime('');
-    // setTimes('');
-    // setTaskName('');
-    // setActivePriority(-1);
   }
+
+  //EvaluateData evaluates the data wheather the information provided is valid or not
 
 
 
@@ -77,6 +78,8 @@ export default function FormInput({onaddTask}) {
   {
     setBreakTime(breakt);
   }
+
+  ///above are handlers for setting the inputs in states mentioned at the top
 
 
   return (

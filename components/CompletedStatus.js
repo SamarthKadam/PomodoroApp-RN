@@ -2,6 +2,8 @@ import { View, Text,StyleSheet } from 'react-native'
 import React from 'react'
 import { Ionicons } from '@expo/vector-icons';
 
+//This is component to be rendered when the user completes its all tasks
+
 export default function CompletedStatus() {
   return (
     <View style={styles.container}>

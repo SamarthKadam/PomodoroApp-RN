@@ -1,3 +1,5 @@
+//All the queries are written this file,database used is SQlite
+
 import * as SQLite from 'expo-sqlite'
 
 const database=SQLite.openDatabase('tasks.db');

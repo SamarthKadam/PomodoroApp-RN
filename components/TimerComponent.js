@@ -2,7 +2,7 @@ import { View, Text, StyleSheet,BackHandler,Alert} from 'react-native'
 import React, { useEffect, useState } from 'react'
 import Button from '../utils/Button'
 import { Color } from '../constants/Colors'
-import { CountdownCircleTimer } from 'react-native-countdown-circle-timer'
+import { CountdownCircleTimer } from 'react-native-countdown-circle-timer' ///used External library for displaying CircleTimer
 import {useIsFocused, useNavigation } from '@react-navigation/native'
 import { updateTask} from '../store/database'
 import { playSound } from '../services/playSound'
@@ -12,6 +12,7 @@ export default function TimerComponent({popupUpdation,data,setShowPopUp,showPopU
 
 
   const PomoTime=25*60;
+  ///Here 25 saying the Pomodoro is of 25Min
 
   let value=PomoTime-data.time;
   let isVerification=PomoTime;
@@ -39,11 +40,14 @@ export default function TimerComponent({popupUpdation,data,setShowPopUp,showPopU
     return () => backHandler.remove();
   }, []);
 
+  //Above useEffect hook is used to handle if user press BackButton
+
 
 
 
 
  const isFocused=useIsFocused();
+ ///This is hook that is used to know wheather this component is viewed or not
 
 
 
@@ -55,6 +59,8 @@ export default function TimerComponent({popupUpdation,data,setShowPopUp,showPopU
   const navigation=useNavigation();
   const[isPlaying,setIsPlaying]=useState(false);
   const [key,setKey]=useState(0);
+
+  ///some states declared
 
 
   async function updateTaskTime()
@@ -70,6 +76,8 @@ export default function TimerComponent({popupUpdation,data,setShowPopUp,showPopU
     const time=minutes*60+seconds;
     await updateTask(data.id,time);
   }
+  //updateTaskTime updated the time that is time elapsed for the given task.This would be called whenever user exits
+  //the screen or when the screen is unmounted.
 
 
   async function resetTimer()
@@ -91,6 +99,8 @@ export default function TimerComponent({popupUpdation,data,setShowPopUp,showPopU
 
   },[isFocused])
 
+  //above useEffect takes care of updating the time whenever the screen component is unmounted
+
 
 
   function PauseTimer()
@@ -103,9 +113,8 @@ export default function TimerComponent({popupUpdation,data,setShowPopUp,showPopU
     
     updateTaskTime();
     setIsPlaying((data)=>!data);
-
   }
-
+///Above is pause/play handler
 
 
 
@@ -122,6 +131,7 @@ export default function TimerComponent({popupUpdation,data,setShowPopUp,showPopU
     // }
     navigation.navigate('ListAdd');
   }
+  ///above is exithandler when exited will take to other screen
 
 
 

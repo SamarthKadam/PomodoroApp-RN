@@ -5,12 +5,16 @@ import Onboarding from 'react-native-onboarding-swiper';
 import { useNavigation } from '@react-navigation/native';
 import Para from '../components/Para';
 
+
+//This is LandingPage
+
 export default function LandingPage() {
 
   const navigation=useNavigation();
 
 
     return <Onboarding
+    onSkip={()=>{navigation.replace('Home')}}
     pages={[
       {
         backgroundColor:Color.primary800,

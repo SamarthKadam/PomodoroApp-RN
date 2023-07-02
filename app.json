@@ -20,7 +20,7 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/icon.png",
-        "backgroundColor": "#ffffff"
+        "backgroundColor": "#2D2D2D"
       },
       "package": "com.samarthkadam.PomodoroApp"
     },

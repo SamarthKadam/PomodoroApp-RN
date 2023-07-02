@@ -1,6 +1,8 @@
 import { View, Text,StyleSheet } from 'react-native'
 import React from 'react'
 
+//This is paragraph componentt which styles the lines or para.
+
 export default function Para({children}) {
   return (
     <View style={styles.textContainer}>

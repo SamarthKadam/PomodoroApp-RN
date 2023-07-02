@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { View, Text,StyleSheet } from 'react-native';
 
+//This is Popup Component.Pops to show some relevant information
+
 const Popup = ({ message }) => {
 
     return <View style={styles.modelCover}>

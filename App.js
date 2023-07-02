@@ -16,11 +16,12 @@ import * as SplashScreen from 'expo-splash-screen'
 import { useState } from 'react';
 import { init } from './store/database';
 
-SplashScreen.preventAutoHideAsync();
+SplashScreen.preventAutoHideAsync();    ///Adding A SplashScreen Initially while data is loaded
 
 const Stack=createNativeStackNavigator();
 const Tab=createBottomTabNavigator();
 
+///Above are the navigators used in the application
 
 
 function ListAdd({navigation})
@@ -57,6 +58,7 @@ export default function App() {
     })
   },[])
 
+  ///using this useEffectHook we are fetching data from backend(sqlite)
 
   if(dbInitialized)
   {
@@ -66,7 +68,7 @@ export default function App() {
       await SplashScreen.hideAsync();
     }
 
-    hideScreen();
+    hideScreen(); //hiding the splash Screen when data is loaded
   }
 
 

@@ -10,6 +10,8 @@ import LoadingOverlay from '../components/LoadingOverlay'
 export default function StatsScreen() {
 
 
+  //This is statsScreen that shows information like completion time,remaining tasks, completed tasks
+
   const isFocused=useIsFocused();
   const[completedTask,setCompletedTask]=useState()
   const[totalTask,setTotalTask]=useState()
@@ -56,6 +58,7 @@ export default function StatsScreen() {
 
   },[isFocused])
 
+  //When this screen is mounted we have these three functions called which will get the required data
 
 
   if((!totalTask&&totalTask!==0) || (!completedTask&& completedTask!==0) || (!remainingDuration&& remainingDuration!==0))

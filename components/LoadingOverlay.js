@@ -1,6 +1,9 @@
 import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
 import { Color } from '../constants/Colors';
 
+
+//This is loadingOverlay component which displays loading spinner
+
 function LoadingOverlay({ message }) {
   return (
     <View style={styles.rootContainer}>

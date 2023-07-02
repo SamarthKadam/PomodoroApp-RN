@@ -2,6 +2,8 @@ import { View, Text,StyleSheet} from 'react-native'
 import React from 'react'
 import { Color } from '../constants/Colors'
 
+//This is statsBar component
+
 export default function StatsBar({val,description}) {
   return (
     <View style={styles.container}>

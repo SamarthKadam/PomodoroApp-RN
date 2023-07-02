@@ -5,6 +5,8 @@ import { FontAwesome } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons'; 
 
+//This component is used to display tasks which is styled.
+
 export default function TaskList({id,title,time,priority,compltdinterval,interval,deleteTaskHandler,startTaskTimer,show,completed,deleteTaskFunction}) {
 
 

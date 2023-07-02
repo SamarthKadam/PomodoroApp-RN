@@ -9,11 +9,14 @@ export default function AddTask() {
 
   const navigation=useNavigation();
 
+  ///This Screen is for inputing Infor
+
 async  function addTaskHandler(task)
   {
     await insertTask(task);
     navigation.navigate('List');
   }
+  //above function adds task to database (sqlite)
 
   return (
     <View style={styles.screen}>

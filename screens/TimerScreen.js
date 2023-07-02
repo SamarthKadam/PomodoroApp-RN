@@ -9,6 +9,8 @@ import { updateCmpCount,updatePopStatus} from '../store/database'
 import { useNavigation } from '@react-navigation/native'
 import { isCompletedUpdated } from '../store/database'
 
+//This is TimerScreen
+
 export default function Timer() {
 
   const route=useRoute();
@@ -16,9 +18,12 @@ export default function Timer() {
   const psdData=route.params.chosen;
   const [data,setdata]=useState(psdData[0]);
 
+
  const isFocused=useIsFocused();
  const [showTimer,setShowTimer]=useState(false);
  const[showPopUp,setShowPopUp]=useState();
+
+ ///above are some states for maintening UI
 
 
  useEffect(()=>{
@@ -33,7 +38,7 @@ export default function Timer() {
     setShowTimer(false);
   }
  },[isFocused])
-
+ //When screen mounted its sets the data which is selected.
 
 
 
@@ -81,6 +86,8 @@ async function popupUpdation(val)
  {
   setShowPopUp(val);
  }
+
+ //Above are small utility functions which are used for handling UI.
 
 
   return (

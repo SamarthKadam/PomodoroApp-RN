@@ -41,6 +41,7 @@ export default function List() {
     })
    await deleteTask(id);
   }
+  //above function deleteTasks with specific id from state as well as database
 
 
   function deleteTaskHandler(id)
@@ -59,11 +60,15 @@ export default function List() {
     ])
   }
 
+  //Above function prompts the user wheather he is sure to delete the task.
+
   function startTaskTimer(id)
   {
    const chosen=tasks.filter((task)=>task.id===id)
    navigation.navigate('Timer',{chosen});
   }
+
+  ///Above function is used to start the timer with specific task selected.
  
 
 
@@ -82,6 +87,8 @@ export default function List() {
     }
 
   },[isFocused])
+
+  ///Above useEffect function loadsall the tasks from the database.further they are added to their respective category
 
  function renderTasks(itemData)
  {

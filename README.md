@@ -7,3 +7,9 @@ InputScreen<br />
 
 HomeScreen<br /> 
 ![Alt text](https://i.ibb.co/PcBFMmZ/Your-paragraph-text.png)
+
+HomeScreen<br /> 
+![Alt text](https://i.ibb.co/RgN2SQS/Your-paragraph-text-3.png)
+
+TimerScreen<br /> 
+![Alt text](https://i.ibb.co/PZYYFbD/Your-paragraph-text-2.png)

@@ -22,17 +22,7 @@ _Below is an example of how you can instruct your audience on installing and set
    ```sh
    npm install
    ```
-3.If you have an Android simulator running, open it in Android view 
+3. If you have an Android simulator running, open it in Android view 
 
- 
-InputScreen<br />
-![Alt text](https://i.ibb.co/BqDvLq0/Your-paragraph-text-1.png)
-
-HomeScreen<br /> 
-![Alt text](https://i.ibb.co/PcBFMmZ/Your-paragraph-text.png)
-
-HomeScreen<br /> 
-![Alt text](https://i.ibb.co/RgN2SQS/Your-paragraph-text-3.png)
-
-TimerScreen<br /> 
-![Alt text](https://i.ibb.co/PZYYFbD/Your-paragraph-text-2.png)
+Preview<br />
+![Alt text](https://i.ibb.co/Bshhbzt/Untitled-design-2.png)

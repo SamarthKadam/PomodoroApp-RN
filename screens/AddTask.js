@@ -1,4 +1,4 @@
-import { View,StyleSheet} from 'react-native'
+import { View,StyleSheet, KeyboardAvoidingView} from 'react-native'
 import React from 'react'
 import { Color } from '../constants/Colors'
 import FormInput from '../components/FormInput'

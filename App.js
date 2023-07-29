@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import LandingPage from './screens/LandingPageScreen';
@@ -15,6 +15,8 @@ import { useEffect } from 'react';
 import * as SplashScreen from 'expo-splash-screen'
 import { useState } from 'react';
 import { init } from './store/database';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import LoadingOverlay from './components/LoadingOverlay';
 
 SplashScreen.preventAutoHideAsync();    ///Adding A SplashScreen Initially while data is loaded
 
@@ -47,8 +49,8 @@ export function HomePage()
 
 export default function App() {
 
-
   const[dbInitialized,setDbInitialized]=useState(false);
+  const [firstLaunch,setIsFirstLaunch]=useState(null);
 
   useEffect(()=>{
     init().then(()=>{
@@ -69,6 +71,38 @@ export default function App() {
     }
 
     hideScreen(); //hiding the splash Screen when data is loaded
+  }
+
+  useEffect(()=>{
+    AsyncStorage.getItem('alreadyLaunched').then((data)=>{
+      if(data===null)
+      {
+        AsyncStorage.setItem('alreadyLaunched','true');
+        setIsFirstLaunch(true);
+      }
+      else{
+        setIsFirstLaunch(false);
+        // navigation.replace('Home');
+      }
+    })
+
+  },[])
+
+  if(firstLaunch===null)
+  return <LoadingOverlay></LoadingOverlay>
+
+  if(firstLaunch===false)
+  {
+   return (<>
+   <StatusBar style="light"></StatusBar>
+     <NavigationContainer>
+       <Stack.Navigator>
+         <Stack.Screen name='Home' options={{
+           headerShown:false
+         }} component={HomePage} ></Stack.Screen>
+       </Stack.Navigator>
+     </NavigationContainer>
+      </>)
   }
 
 

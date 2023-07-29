@@ -11,7 +11,7 @@ import { fetchTasks } from '../store/database'
 import { useIsFocused } from '@react-navigation/native'
 import { deleteTask } from '../store/database'
 import CompletedStatus from '../components/CompletedStatus'
-import Para from '../components/Para'
+import LoadingOverlay from '../components/LoadingOverlay'
 
 
 export default function List() {

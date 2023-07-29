@@ -1,4 +1,4 @@
-import { View,StyleSheet,Text, TextInput} from 'react-native'
+import { View,StyleSheet,Text, TextInput, KeyboardAvoidingView} from 'react-native'
 import React from 'react'
 import Greet from '../utils/Greet'
 import { Color } from '../constants/Colors'
@@ -95,6 +95,7 @@ export default function FormInput({onaddTask}) {
        <PressComp id='1' onPress={selectionLevel} style={[styles.levelContainer,activePriority===1?styles.bgyel:null]}><Text style={styles.leveltxt}>Medium </Text></PressComp>
        <PressComp id='2' onPress={selectionLevel} style={[styles.levelContainer,activePriority===2?styles.bggreen:null]}><Text style={styles.leveltxt}>Low </Text></PressComp>
       </View>
+      <KeyboardAvoidingView behavior="padding">
       <View style={[styles.Container,styles.alignCen]}>
         <View><Text style={styles.boldText}>No of times (Repeatations)</Text></View>
         <View style={styles.numberTextInputContainer}><TextInput value={times} onChangeText={timeInputHandler} style={styles.NumberTextInput} keyboardType="number-pad" maxLength={1}></TextInput></View>
@@ -103,6 +104,7 @@ export default function FormInput({onaddTask}) {
         <View><Text style={styles.boldText}>Short break (Minutes)</Text></View>
         <View style={styles.numberTextInputContainer}><TextInput value={breaktime} onChangeText={breakInputHandler} style={styles.NumberTextInput} keyboardType="number-pad" maxLength={1}></TextInput></View>
       </View>
+      </KeyboardAvoidingView>
     </View>
   )
 }

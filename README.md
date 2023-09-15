@@ -4,7 +4,7 @@ The Pomodoro app is a productivity tool designed to help users effectively manag
 
 ### Screenshots :
 
-![Alt text](https://i.ibb.co/nB4BkDr/AddTask.png)
+<img src="./src/design.png">
 
 
 ## Getting Started
